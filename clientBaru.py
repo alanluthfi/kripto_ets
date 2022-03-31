@@ -1,6 +1,4 @@
-from PIL import Image, ImageOps
-import numpy as np
-import cv2
+import socket
 from PIL import Image
 
 def keyRSA (pa, qa):
@@ -42,32 +40,24 @@ def encryptRSA(ma):
     # encrypted = "".join([c for c in encrypted])
     return tuple(encrypted)
 
-image = Image.open("tugas.png")
+
+image = Image.open("tugasKecil.png")
 pixels = list(image.getdata())
 width, height = image.size
 pixels = [pixels[i * width:(i + 1) * width] for i in range(height)]
 
-# print(pixels)
-
-
-pixels_out = []
-for row in pixels:
-    for tup in row:
-        pixels_out.append(tup)
 keyRSA(47,61)
-    
-image_out = Image.new(image.mode,image.size)
-image_out.putdata(pixels_out)
+encryptRSA(pixels)
 
-image_out.save('test_out.png')
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # AF_INET = IP, SOCK_STREAM = TCP
+client.connect(('localhost', 1002))  # 127.0.0.1
 
+#file = open('tugasKecil.png', 'rb')
+#image_data = file.read(2048)
 
+while True:
+    client.send(pixels)
+    #image_data = file.read(2048)
 
-
-# list pixel (a, b, c, d) -> mbuh berapa
-            #(e, f, g, h)
-"""
-    for row in pixel:
-        for tup in row: (a, b, c, d)
-            pixel_out(encryptRSA(tup))
-"""
+file.close()
+client.close()
