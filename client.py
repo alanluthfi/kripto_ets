@@ -1,7 +1,6 @@
 import socket
 from PIL import Image
 import AES, RSA
-import numpy as np
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # AF_INET = IP, SOCK_STREAM = TCP
 client.connect(('localhost', 1002))  # 127.0.0.1
