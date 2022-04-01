@@ -3,14 +3,12 @@ from PIL import Image
 from numpy import imag
 import pickle
 import io
-# from PIL import ImageFile
-# ImageFile.LOAD_TRUNCATED_IMAGES = True
+
 
 def decryptRSA(ma):
     key = "77,221" # input("Input public key:")
     d, N = int(key.split(",")[0]), int(key.split(",")[1])
     m = ma
-    #block = 4
     decrypted = [(c**d % N) for c in m]
     return tuple(decrypted)
 
@@ -45,37 +43,3 @@ image_out2.save('test_outDec.png')
 
 
 client_socket.close()
-#img.close()
-
-#image = Image.open("tugasdec.png")
-#pixels = list(image_chunk.getdata())
-
-# pixels_out = []
-# for row in pixels:
-#     for tup in row:
-#         pixels_out.append(tup)
-# image2 = Image.frombytes('RGBA', (128,128), image_chunk, 'raw')
-# pixels = list(image2.getdata())
-# # width, height = image2.size
-# # pixels = [pixels[i * width:(i + 1) * width] for i in range(height)]
-
-# pixels_out = []
-# for row in pixels:
-#     for tup2 in row:
-#         pixels_out.append(tup2)
-
-# image_out = Image.new(image2.mode,image2.size)
-# image_out.putdata(pixels_out)
-# image_out.save('test_out.png')
-
-# for row in pixels:
-#     for tup in row:
-#         decryptRSA(tup)
-
-
-
-
-# pixels_out = []
-# for row in pixels:
-#     for tup in row:
-#         pixels_out.append(tup)

@@ -63,31 +63,13 @@ image_test.save('test_out_encr.png')
 file = open('test_out_encr.png', 'rb')
 image_data = file.read(2048)
 
-
-#res = int.from_bytes(tup, byteorder ='big')
-
-#encryptRSA(pixels)
-
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # AF_INET = IP, SOCK_STREAM = TCP
 client.connect(('localhost', 1002))  # 127.0.0.1
 
-#file = open('tugasKecil.png', 'rb')
-#image_data = file.read(2048)
-
-#sup = pickle.dumps(tup)
 while image_data:
-    #client.send(sup)
     client.send(image_data)
     image_data = file.read(2048)
 
 
-#file.close()
+file.close()
 client.close()
-
-
-
-
-
-# for row in pixels:
-#     for tup in row:
-#         encryptRSA(tup)
