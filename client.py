@@ -15,7 +15,6 @@ if option.lower() == "image":
     image = Image.open(imagename)
     pixels = list(image.getdata())
     width, height = image.size
-    print(image.size)
     pixels = [pixels[i * width:(i + 1) * width] for i in range(height)]
     string_pixels_test = []
     for row in pixels:
@@ -25,7 +24,6 @@ if option.lower() == "image":
     string_pixels_test.append(str(image.size[0]).zfill(5))
     string_pixels_test.append(str(image.size[1]).zfill(5))
     string_pixels_test = "".join(string_pixels_test)
-    print(len(string_pixels_test))
     client.send(string_pixels_test.encode('ascii'))
     image.close()
 
