@@ -73,7 +73,6 @@ for h in range(0, 40):
   
   # take the last column
   output = subsKey[-1]
-  # print("last column {}".format([hex(i) for i in output]))
   # if first column of each round
   if h % 4 == 0:
     round += 1
@@ -82,26 +81,22 @@ for h in range(0, 40):
     first = output[0]
     output = output[1:]
     output.append(first)
-    #print("shift byte {}".format([hex(i) for i in output]))
 
     # subs bytes
     for i in output:
       baris = hex(i).replace("0x", "").zfill(2)[-2]
       kolom = hex(i).replace("0x", "").zfill(2)[-1]
       output[output.index(i)] = SBox[eval("0x" + baris)][eval("0x" + kolom)]
-    # print("subs column {}".format([hex(i) for i in output]))
     
     # First column key (round-1) xor output xor first column Rcom
     output = np.array(subsKey[h]) ^ np.array(output) ^ np.array([RCon[round-1], 0, 0, 0])
     output = output.tolist()
-    # print("xor column {}".format([hex(i) for i in output]))
 
   # second - fourth for each round
   else:
     # last column xor round-1 n column
     output = np.array(output) ^ np.array(subsKey[h])
     output = output.tolist()
-    # print("xor column {}".format([hex(i) for i in output]))
 
   subsKey.append(output)
 
@@ -173,7 +168,6 @@ def dec(encrypt):
         temp = np.array(temp).transpose().tolist()
         output = temp.copy()
 
-        
         # subs bytes
         subs = []
         for kol in output:
@@ -192,6 +186,3 @@ def dec(encrypt):
             if chr(e) != "0":
                 decrypted.append(chr(e))
     return "".join(decrypted)
-
-
-

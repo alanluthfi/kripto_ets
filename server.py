@@ -24,32 +24,6 @@ if option.lower() == "image":
     
     print("Image Received.")
 
-    """image = open("rec_encrypted.png", "wb")
-    image_chunk = client_socket.recv(2048)
-
-    while image_chunk:
-        image.write(image_chunk)
-        image_chunk = client_socket.recv(2048)
-
-    image.close()
-
-    encrypted_string = client_socket.recv(2048).decode('ascii')
-    imagename = input("Decrypting image...\nInput image name: ")
-    image = Image.open("rec_encrypted.png")
-    pixels = list(image.getdata())
-    width, height = image.size
-    pixels_test = RSA.dec(encrypted_string)
-    # print(pixels_test)
-    image_test = Image.new(image.mode,image.size)
-    image_test.putdata(pixels_test)
-    image_test.save('{}.png'.format(imagename))
-    image.close()
-    print("Image Received.")"""
-
-    
-
-
-
 elif option.lower() == "text":
     print("Receiving text...")
     message = client_socket.recv(2048).decode('ascii')

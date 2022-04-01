@@ -24,11 +24,10 @@ for d in range(1, 9999):
     break
 
 def enc(m):
-    encrypted = [((c**e) % N) for c in m]
     block = 4
     string_encrypted = ["{}".format(c**e % N).zfill(block) for c in m]
     string_encrypted = "".join([c for c in string_encrypted])
-    return tuple(encrypted), string_encrypted
+    return string_encrypted
 
 def dec(m):
     decrypted = [int(m[i:i+4])**d % N for i in range(0, len(m), 4)]

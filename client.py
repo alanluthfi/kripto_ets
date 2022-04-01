@@ -17,13 +17,10 @@ if option.lower() == "image":
     width, height = image.size
     print(image.size)
     pixels = [pixels[i * width:(i + 1) * width] for i in range(height)]
-    pixels_test = []
     string_pixels_test = []
     for row in pixels:
         for tup in row:
-            a, b = RSA.enc(tup)
-            pixels_test.append(a)
-            string_pixels_test.append(b)
+            string_pixels_test.append(RSA.enc(tup))
     
     string_pixels_test.append(str(image.size[0]).zfill(5))
     string_pixels_test.append(str(image.size[1]).zfill(5))
@@ -31,35 +28,6 @@ if option.lower() == "image":
     print(len(string_pixels_test))
     client.send(string_pixels_test.encode('ascii'))
     image.close()
-    """image = Image.open(imagename)
-    pixels = list(image.getdata())
-    width, height = image.size
-    print(image.size)
-    pixels = [pixels[i * width:(i + 1) * width] for i in range(height)]
-    pixels_test = []
-    string_pixels_test = []
-    for row in pixels:
-        for tup in row:
-            a, b = RSA.enc(tup)
-            pixels_test.append(a)
-            string_pixels_test.append(b)
-    print(np.array(pixels_test).shape)
-    image_test = Image.new(image.mode,image.size)
-    image_test.putdata(pixels_test)
-    image_test.save('encrypted.png')
-    image.close()
-
-    # sending encrypted image
-
-    image = open('encrypted.png', 'rb')
-    image_data = image.read(2048)
-    while image_data:
-        client.send(image_data)
-        image_data = image.read(2048)
-    image.close()
-    
-    string_pixels_test = "".join(string_pixels_test)
-    client.send(string_pixels_test.encode('ascii'))"""
 
 elif option.lower() == "text":
     message = input("message: ").zfill(16)
